@@ -8,12 +8,14 @@ import android.widget.TextView
 import android.widget.Toast
 
 class HomeActivity : AppCompatActivity() {
+    lateinit var tvHome:TextView  //declaring
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
         var name = intent.extras?.getString("sk")
-        var tvHome = findViewById<TextView>(R.id.tvHome)
+        tvHome = findViewById(R.id.tvHome) //initializing
         tvHome.text = name
     }
 
@@ -33,6 +35,15 @@ class HomeActivity : AppCompatActivity() {
         var intent: Intent    //kotlin says you can't have a variable as null
         intent = Intent(this, MainActivity::class.java)  //no need to give the word new
         intent.putExtra("ds", "divyang sharma")
-        startActivity(intent)
+        startActivityForResult(intent,123)
+    }
+
+
+    //result will arrive here -- photo, contact
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == RESULT_OK && requestCode == 123){ //RESULT_OK means its good to consume, 123 -- data being returned is of type contact
+            tvHome.text = data?.extras?.getString("con")
+        }
     }
 }

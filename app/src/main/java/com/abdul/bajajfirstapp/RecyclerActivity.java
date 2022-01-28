@@ -14,5 +14,6 @@ public class RecyclerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler);   //inflating activity_recyclerview layoutinflater
         RecyclerView countriesRecyclerView = findViewById(R.id.countriesRview); //socket
+        CountriesAdapter adapter = new CountriesAdapter(countries);
     }
 }

@@ -1,6 +1,7 @@
 package com.abdul.bajajfirstapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -15,5 +16,8 @@ public class RecyclerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recycler);   //inflating activity_recyclerview layoutinflater
         RecyclerView countriesRecyclerView = findViewById(R.id.countriesRview); //socket
         CountriesAdapter adapter = new CountriesAdapter(countries);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        countriesRecyclerView.setLayoutManager(layoutManager);
+        countriesRecyclerView.setAdapter(adapter);
     }
 }

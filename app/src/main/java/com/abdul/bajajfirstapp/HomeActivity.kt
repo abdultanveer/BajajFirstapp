@@ -27,13 +27,14 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun startDialer() {
-        var dialIntent: Intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:21345678"))
+        var dialIntent: Intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:21345678"))  //implicit intent
         startActivity(dialIntent)
     }
 
     private fun startMain() {
         var intent: Intent    //kotlin says you can't have a variable as null
         intent = Intent(this, MainActivity::class.java)  //no need to give the word new
+        //explicit intent -- explicitly giving the name of the class to be invoked
         intent.putExtra("ds", "divyang sharma")
         startActivityForResult(intent,123)
     }

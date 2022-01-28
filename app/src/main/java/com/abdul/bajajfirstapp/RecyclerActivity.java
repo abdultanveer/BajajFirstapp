@@ -29,7 +29,11 @@ public class RecyclerActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Log.w(TAG,"starting");
-        throw new NullPointerException();
+        int j = 1;
+        for(int i=1; i<10; i++){
+           j = i*5 +10 -13;
+        }
+        //throw new NullPointerException();
 
     }
 

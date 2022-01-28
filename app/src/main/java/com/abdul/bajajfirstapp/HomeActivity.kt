@@ -4,19 +4,26 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), View.OnFocusChangeListener {
     lateinit var tvHome:TextView  //declaring
+    lateinit var etContact: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        var name = intent.extras?.getString("sk")
+        //var name = intent.extras?.getString("sk")
         tvHome = findViewById(R.id.tvHome) //initializing
-        tvHome.text = name
+      //  tvHome.text = name
+
+        etContact = findViewById(R.id.etContact)
+
+        etContact.setOnFocusChangeListener(this)
     }
 
     fun handleClick(view: android.view.View) {
@@ -45,6 +52,16 @@ class HomeActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode == RESULT_OK && requestCode == 123){ //RESULT_OK means its good to consume, 123 -- data being returned is of type contact
             tvHome.text = data?.extras?.getString("con")
+        }
+    }
+
+    override fun onFocusChange(p0: View?, isFocussed: Boolean) {
+        if(isFocussed){
+            Toast.makeText(this,"focussed",Toast.LENGTH_SHORT).show()
+        }
+        else{
+            Toast.makeText(this,"lost focus",Toast.LENGTH_SHORT).show()
+
         }
     }
 }

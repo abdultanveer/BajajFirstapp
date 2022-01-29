@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -12,11 +13,13 @@ class FirestoreActivity : AppCompatActivity() {
 
     lateinit var titleEditText: EditText
     lateinit var notesEditText: EditText
+    lateinit var db: FirebaseFirestore
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_firestore)
+         db = Firebase.firestore
 
         titleEditText = findViewById(R.id.etTitle)
         notesEditText = findViewById(R.id.etNotes)
@@ -27,16 +30,31 @@ class FirestoreActivity : AppCompatActivity() {
             R.id.btn_fssend ->{
                 sendDatatoFs()
             }
+            R.id.btn_fsget -> {
+                getDataFs()
+            }
         }
     }
 
+    private fun getDataFs() {
+        db.collection("users")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    Log.d(TAG, "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents.", exception)
+            }
+    }
+
     private fun sendDatatoFs() {
-        val db = Firebase.firestore
         var title = titleEditText.text.toString()
         var notes = notesEditText.text.toString()
         val user = hashMapOf(
-            "first" to "Abdul",
-            "last" to "Ansari",
+            "first" to title,
+            "last" to notes,
             "born" to 1815
         )
 

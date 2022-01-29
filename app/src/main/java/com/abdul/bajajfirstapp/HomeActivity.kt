@@ -12,6 +12,7 @@ import android.widget.Toast
 class HomeActivity : AppCompatActivity(), View.OnFocusChangeListener {
     lateinit var tvHome:TextView  //declaring
     lateinit var etContact: EditText
+    lateinit var etEmail: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,9 +23,45 @@ class HomeActivity : AppCompatActivity(), View.OnFocusChangeListener {
       //  tvHome.text = name
 
         etContact = findViewById(R.id.etContact)
+        etEmail = findViewById(R.id.etEmail)
+
 
         etContact.setOnFocusChangeListener(this)
     }
+
+    override fun onPause() {
+        super.onPause()
+        storeState();
+    }
+
+    //view-tool windows-file exploreer-data/data/yourpackage/sharedprefs/filename
+    private fun storeState() {
+        //get the data from the edittext
+        var contact: String = etContact.text.toString()
+        var email = etEmail.text.toString()
+        //create file home_state_prefs
+        var sharedPreferences = getSharedPreferences("home_state_prefs", MODE_PRIVATE)
+        //open the file in edit mode
+        var editor = sharedPreferences.edit()
+        //write the data to the file
+        editor.putString("cont",contact)
+        editor.putString("eml",email)
+        //save the file
+        editor.apply() //appply is asynchronous
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        restoreState();
+    }
+
+    private fun restoreState() {
+        //open the file home_state
+        //read the data from the file
+        //set the data into the edittexts
+    }
+
 
     fun handleClick(view: android.view.View) {
         when(view.id){

@@ -16,6 +16,7 @@ class HomeActivity : AppCompatActivity(), View.OnFocusChangeListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_home)
 
         //var name = intent.extras?.getString("sk")

@@ -58,8 +58,13 @@ class HomeActivity : AppCompatActivity(), View.OnFocusChangeListener {
 
     private fun restoreState() {
         //open the file home_state
+        var sharedPreferences = getSharedPreferences("home_state_prefs", MODE_PRIVATE)
         //read the data from the file
+        var contact = sharedPreferences.getString("cont","")
+        var email = sharedPreferences.getString("eml","")
         //set the data into the edittexts
+        etContact.setText(contact)
+        etEmail.setText(email)
     }
 
 

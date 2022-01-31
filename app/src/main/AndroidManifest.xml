@@ -14,15 +14,17 @@
         android:theme="@style/Theme.BajajFirstapp">
         <activity
             android:name=".ContentProviderActivity"
-            android:exported="false" />
-        <activity
-            android:name=".FirestoreActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".FirestoreActivity"
+            android:exported="true">
+
         </activity>
         <activity
             android:name=".RecyclerActivity"

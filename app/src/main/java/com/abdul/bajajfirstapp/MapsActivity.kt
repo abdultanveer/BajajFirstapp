@@ -10,6 +10,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.abdul.bajajfirstapp.databinding.ActivityMapsBinding
+import com.google.android.gms.maps.model.PolylineOptions
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -44,5 +45,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        val polyline1 = googleMap.addPolyline(
+            PolylineOptions()
+            .clickable(true)
+            .add(
+                LatLng(-35.016, 143.321),
+                LatLng(-34.747, 145.592),
+                LatLng(-34.364, 147.891),
+                LatLng(-33.501, 150.217),
+                LatLng(-32.306, 149.248),
+                LatLng(-32.491, 147.309)))
+
     }
 }

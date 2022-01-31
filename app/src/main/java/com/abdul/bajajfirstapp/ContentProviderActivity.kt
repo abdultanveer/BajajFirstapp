@@ -28,13 +28,15 @@ class ContentProviderActivity : BasePermissionAppCompatActivity() {
             getContentResolver()                   //contentresolver will bring up the db & table into mem
                 .query(uriSms, null, null, null, null)!! //selection -- rows, projectioin --columns
         //select * from inbox
-        var from = arrayOf("display_name")
+
+        var from = arrayOf("display_name","name_raw_contact_id")
             //ContactsContract.CommonDataKinds.Phone.NUMBER)
             //"body")
-        var to = intArrayOf(android.R.id.text1)
+        var to = intArrayOf(android.R.id.text1,android.R.id.text2)
+
         var adapter = SimpleCursorAdapter(
             this,
-            android.R.layout.simple_list_item_1,
+            android.R.layout.simple_list_item_2,
             dataCursor, from, to
         )
 

@@ -6,6 +6,7 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.widget.ListView
 import android.widget.SimpleCursorAdapter
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +19,8 @@ class ContentProviderActivity : BasePermissionAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_content_provider)
 
-        val uriSms: Uri = Uri.parse("content://sms/inbox")
+        val uriSms: Uri = ContactsContract.Contacts.CONTENT_URI
+            //Uri.parse("content://sms/inbox")
 
 
         //getReadSMSPermission(requestPermissionAction(this))
@@ -26,7 +28,9 @@ class ContentProviderActivity : BasePermissionAppCompatActivity() {
             getContentResolver()                   //contentresolver will bring up the db & table into mem
                 .query(uriSms, null, null, null, null)!! //selection -- rows, projectioin --columns
         //select * from inbox
-        var from = arrayOf("body")
+        var from = arrayOf("display_name")
+            //ContactsContract.CommonDataKinds.Phone.NUMBER)
+            //"body")
         var to = intArrayOf(android.R.id.text1)
         var adapter = SimpleCursorAdapter(
             this,
@@ -41,13 +45,7 @@ class ContentProviderActivity : BasePermissionAppCompatActivity() {
     }
 
 
-    val requestPermissionAction =  object : RequestPermissionAction{
-        override fun permissionGranted() {
-        }
 
-        override fun permissionDenied() {
-        }
-    }
 
 
 
